@@ -52,19 +52,19 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 		</div>
 		<div id="xc_scoring_rules_set" style="display:none" class="centered">
 			<div style='text-align: left'>
-				Cross Country is scored based on the top seven runner on each team. Of those runner, the top 5 runners contribute to the team score, while the 6th and 7th runner displace runners on the other teams. All runners after the 7th runner are ignored.
-				<p>
-				In small meets, teams are scored against each other team individually. Therefore in tri and quad meets, they are treated like 2 and 3 dual meets respectivly. Each team is paired of with each team, and the places are consided as though only the tope 7 runners from each of those two teams ran. Then the palces of the first 5 runners on each team are added, and the lower score wins. I denote this "Pairwise Scoring."
-				<p>
-				Large meets are scored by considering the places of the top 5 runners on each team and adding thier positions. Once again, the lowest score wins. I denote this "Invitational Scoring."
+				Cross country meets are scored based on the top 7 runners on each team. Of those runners, the top 5 runners contribute to the team score, while the 6th and 7th runners displace runners on other teams. All runners after the 7th runner for each team are ignored.
+				<h4>Pairwise Scoring</h6>
+				In small meets, each team is scored against each opponent, ignoring any other teams. This is often used in tri-, quad-, and dual-meets. For each pair of teams, ignoring any other teams, the place for each runner is found. Then the (recaluclated) places of the first 5 runners on each team are added, and the lower score wins.
+				<h4>Invitational Scoring</h6>
+				Large meets are scored by considering the places of the top 5 runners on each team (ignoring runners after the 7th runner for each other team), and adding their places. Once again, the lowest score wins.
 				<p>
 				In both kinds of scoring, in the case of a tie, the team with the faster 6th runner wins.
 			</div>
-			<input  type="button" value="Back" class="phonePaddingB" id="xc_scoring_rules_back"/>
+			<input type="button" value="Back" class="phonePaddingB" id="xc_scoring_rules_back"/>
 		</div>
 		<div class="centered" id="first_set">
 			<div>
-				<input type="button" value="How Scoring Works" class="phonePaddingB" id="xc_scoring_rules"> 
+				<input type="button" value="How XC Scoring Works" class="phonePaddingB" id="xc_scoring_rules"> 
 				<input type="button" value="About This Page" class="phonePaddingB" id="about">
 			</div>
 			<p>
@@ -72,15 +72,15 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			Enter team names and assign colors.
 			</div>
 			<table id='teamsTab'>
-				<tr>
+				<tr id="tr1">
 					<td><input type="text" value="Brookline" class="nameI" id="ni1"></td>
-					<td><div value="Team 1 Color" class="colorB box" id="cb1" style="background-color:yellow;color:black">Bro</div></td>
+					<td><div value="Team 1 Color" class="colorB box" id="cb1" style="background-color:blue;color:white">Bro</div></td>
 				</tr>
-				<tr>
+				<tr id="tr2">
 					<td><input type="text" value="Framingham" class="nameI" id="ni2"></td>
 					<td><div value="Team 2 Color" class="colorB box" id="cb2" style="background-color:purple;color:white">Fra</div></td>
 				</tr>
-				<tr>
+				<tr id="tr3">
 					<td><input type="text" value="Braintree" class="nameI" id="ni3"></td>
 					<td><div value="Team 3 Color" class="colorB box" id="cb3" style="background-color:orange;color:black">Bra</div></td>
 				</tr>
@@ -91,7 +91,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			<input type="button" value="-" class="addSubB" id="sub">
 			<p>
 			<div>
-			Choose a scoring method. If in "Pairwise Scoring" mode (used for dual-meets, tri-meets, quad-meets, etc.), the scores will be provided for each team against Team 1, so put the team you are focusing on in the first row.
+			Choose a scoring method. Use "Pairwise Scoring" for dual, tri, and quad-meets.<!-- , the scores will be provided for each team against Team 1, so put the team you are focusing on in the first row. -->
 			</div>
 			<p>
 			<div>
@@ -128,10 +128,10 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 		{color:"Brown",type:LIGHT_COLOR},
 		{color:"Red",type:LIGHT_COLOR},
 		{color:"Orange",type:LIGHT_COLOR},
-		{color:"Yellow",type:LIGHT_COLOR},
+		{color:"Blue",type:DARK_COLOR},
 		{color:"Green",type:DARK_COLOR},
 		{color:"Aqua",type:LIGHT_COLOR},
-		{color:"Blue",type:DARK_COLOR},
+		{color:"#AAAA00",type:LIGHT_COLOR},
 		{color:"Purple",type:DARK_COLOR}];
 		function TeamData(numI,cIndexInit) {
 			this.num=numI;
@@ -200,12 +200,13 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 		var runnerBDiv=document.getElementById('runnerBDiv');
 		add.addEventListener('click',function(item, index){
 			var row = teamsTab.insertRow();
+			var i=teams.length+1;
 			$(row).hide();
+			row.id="tr"+i;
 
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 
-			var i=teams.length+1;
 			cell1.innerHTML="<input type=\"text\" value=\"New Team "+i+"\" class=\"nameI\" id=\"ni"+i+"\">";
 			
 			var i2 = document.createElement('div');
@@ -236,6 +237,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 		var sub=document.getElementById('sub');
 		sub.addEventListener('click',function(item, index){
 			runnerBDiv.removeChild(teams[teams.length-1].runnerB);
+			i=teams.length;
 			team=teams.pop();
 			if(teams.length===2)
 			{
@@ -244,7 +246,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 
 			//teamsTab.deleteRow(teams.length-1);
 			var here = this;
-			$("#teamsTab tr:last").fadeOut(300,
+			$("#tr"+i).fadeOut(300,
 				function(here){
 					$(this).remove();
 				});
