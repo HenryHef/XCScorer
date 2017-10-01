@@ -1,0 +1,55 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Dynamic Drive: CSS Top and Bottom Frames Layout</title>
+	<link rel="stylesheet" href="ts.css">
+</head>
+
+<body>
+    <div id="caixa">
+		<div id="framecontentTop">
+			<div class="innertube">
+				Enter team names below, and assign a unique color to each, and choose a scoring method. If in "dual meet" mode, the scores will be provided for each team against Team 1, so put the team you care about in that spot.
+			</div>
+		</div>
+
+		<div id="framecontentBottom">
+			<div class="innertube">
+				<div>
+					<input type="button" value="Single Team Score" class="radiob" id="big_meetRB" style="background-color:#FFCCCC">
+					<input type="button" value="Pairwise Scoring" class="radiob" id="duel_meetRB" style="background-color:green"> 
+				</div>
+				<p/>
+				<input type="button" value="+" class="addSubB" id="add">
+				<input type="button" value="-" class="addSubB" id="sub">
+				<p/>
+				<input type="button" value="Done" id="done" class="phonePaddingB">
+			</div>
+		</div>
+
+
+		<div id="maincontent">
+			<div class="innertube">
+				<table id='teamsTab'>
+					<tr>
+						<td><input type="text" value="Brookline" class="nameI" id="ni1"></td>
+						<td><div value="Team 1 Color" class="colorB box" id="cb1">Bro</div></td>
+					</tr>
+					<tr>
+						<td><input type="text" value="Framingham" class="nameI" id="ni2"></td>
+						<td><div value="Team 2 Color" class="colorB box" id="cb2">Fra</div></td>
+					</tr>
+					<tr>
+						<td><input type="text" value="Braintree" class="nameI" id="ni3"></td>
+						<td><div value="Team 3 Color" class="colorB box" id="cb3">Bra</div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

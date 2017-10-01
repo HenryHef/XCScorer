@@ -1,0 +1,53 @@
+.box{
+	width:30px;
+	height:30px;
+	float:left;
+	border: 5px solid black;
+	margin:2px;
+	transition: background-color .1s ease-in-out;
+	line-height: 29px;
+	text-align: center;
+	font-size: 13px
+}
+.fadable{
+	transition: all .6s ease-in-out;
+}
+.nameInput {
+	width: 85%;
+}
+
+.centered
+{
+	text-align: center;
+}
+#divBxs
+{
+	height:240px;
+	overflow-x: auto;
+}
+.roundedBackground
+{
+	-moz-border-radius: 6px; 
+	border-radius: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+.radiob
+{
+	padding:5px;
+	background-color:green;
+	color:black;
+}
+
+body
+{
+  overflow-x: hidden;
+}
+table {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+

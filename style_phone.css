@@ -1,0 +1,26 @@
+.runnerB
+{
+	padding: 18px;
+	margin:5px;
+}
+.phonePaddingB,.radiob,.nameI/*,.colorB*/
+{
+	padding: 10px;
+}
+.addSubB
+{
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin:5px;
+}
+/*.box{
+	width:18px;
+	height:18px;
+	border: 3px solid black;
+	margin:1px;
+	line-height: 17px;
+	text-align: center;
+	font-size: 11px
+}*/
