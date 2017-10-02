@@ -26,6 +26,10 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
   media="only screen and (max-device-width: 4in)" href="style_phone.css">
 		<meta name=viewport
 			content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0, user-scalable=no">
+		<meta name="description" content="A Free Tool For Scoring Cross Country Meets in Real Time">
+		<meta name="author" content="Henry Heffan">
+		<meta name="keywords" content="Cross Country, Cross Country Scoring, XC, XC Scoring, Jamaica Pond, Brookline">
+		<meta name="robots" content="All">
 	</head>
 	<body>
 		<div id="about_set" style="display:none" class="centered">
@@ -69,7 +73,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			</div>
 			<p>
 			<div>
-			Enter team names and assign colors.
+			Enter team names and press boxes to assign colors.
 			</div>
 			<table id='teamsTab'>
 				<tr id="tr1">
@@ -95,8 +99,8 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			</div>
 			<p>
 			<div>
-				<input type="button" value="Invitational Scoring" class="radiob" id="big_meetRB" style="background-color:#E2E2E2;font-weight:normal;">
 				<input type="button" value="Pairwise Scoring" class="radiob" id="duel_meetRB" style="background-color:green;font-weight:bold;"> 
+				<input type="button" value="Invitational Scoring" class="radiob" id="big_meetRB" style="background-color:#E2E2E2;font-weight:normal;">
 			</div>
 			<p>
 			<input type="button" value="Go Score!" id="done" class="phonePaddingB">
@@ -124,15 +128,17 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
     //document.getElementById("myHeader").
     	const LIGHT_COLOR=0,DARK_COLOR=1;
 		var posCList=
-		[{color:"Gray",type:LIGHT_COLOR},
-		{color:"Brown",type:LIGHT_COLOR},
-		{color:"Red",type:LIGHT_COLOR},
-		{color:"Orange",type:LIGHT_COLOR},
-		{color:"Blue",type:DARK_COLOR},
-		{color:"Green",type:DARK_COLOR},
-		{color:"Aqua",type:LIGHT_COLOR},
-		{color:"#AAAA00",type:LIGHT_COLOR},
-		{color:"Purple",type:DARK_COLOR}];
+		[{color:"Red",type:LIGHT_COLOR},//0
+		{color:"Orange",type:LIGHT_COLOR},//1
+		{color:"#AAAA00",type:LIGHT_COLOR},//2
+		{color:"Green",type:DARK_COLOR},//3
+		{color:"Blue",type:DARK_COLOR},//4
+		{color:"Aqua",type:LIGHT_COLOR},//5
+		{color:"Purple",type:DARK_COLOR},//6
+		{color:"Black",type:DARK_COLOR},//7
+		{color:"Gray",type:LIGHT_COLOR},//8
+		{color:"Brown",type:LIGHT_COLOR},];//9
+		var selection_order=[4,6,2,5,9,0,3,7,1,8]
 		function TeamData(numI,cIndexInit) {
 			this.num=numI;
 			this.runnerB = document.getElementById('rb'+this.num);
@@ -191,7 +197,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 		var scoresDiv = document.getElementById('scoresDiv');
 		var scoresPArray=[];
 
-		var teams=[new TeamData(1,(4*1)%posCList.length),new TeamData(2,(4*2)%posCList.length),new TeamData(3,(4*3)%posCList.length)];
+		var teams=[new TeamData(1,selection_order[0]),new TeamData(2,selection_order[1]),new TeamData(3,selection_order[2])];
 
 		var teamsTab=document.getElementById('teamsTab');
 
@@ -227,7 +233,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			i3.id="rb"+i;
 			runnerBDiv.appendChild(i3);
 
-			team=new TeamData(i,(4*i)%posCList.length);
+			team=new TeamData(i,selection_order[(i-1)%selection_order.length]);
 			teams.push(team);
 
 			setUpTeam(team,teams.length-1);
