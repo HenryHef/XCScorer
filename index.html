@@ -86,7 +86,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 				</tr>
 				<tr id="tr3">
 					<td><input type="text" value="Braintree" class="nameI" id="ni3"></td>
-					<td><div value="Team 3 Color" class="colorB box" id="cb3" style="background-color:orange;color:black">Bra</div></td>
+					<td><div value="Team 3 Color" class="colorB box" id="cb3" style="background-color:#AAAA00;color:black">Bra</div></td>
 				</tr>
 			</table>
 			<p>
@@ -198,6 +198,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 		var scoresPArray=[];
 
 		var teams=[new TeamData(1,selection_order[0]),new TeamData(2,selection_order[1]),new TeamData(3,selection_order[2])];
+		var toAdd=[];
 
 		var teamsTab=document.getElementById('teamsTab');
 
@@ -213,7 +214,16 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 
-			cell1.innerHTML="<input type=\"text\" value=\"New Team "+i+"\" class=\"nameI\" id=\"ni"+i+"\">";
+			teamName="New Team "+i;
+			teamColorIndex=selection_order[(i-1)%selection_order.length];
+			if(toAdd.length>0)
+			{
+				nteam=toAdd.pop();
+				teamName=nteam.name;
+				teamColorIndex=nteam.colorIndex;
+			}
+
+			cell1.innerHTML="<input type=\"text\" value=\""+teamName+"\" class=\"nameI\" id=\"ni"+i+"\">";
 			
 			var i2 = document.createElement('div');
 			//i2.type="button";
@@ -233,7 +243,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			i3.id="rb"+i;
 			runnerBDiv.appendChild(i3);
 
-			team=new TeamData(i,selection_order[(i-1)%selection_order.length]);
+			team=new TeamData(i,teamColorIndex);
 			teams.push(team);
 
 			setUpTeam(team,teams.length-1);
@@ -245,6 +255,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			runnerBDiv.removeChild(teams[teams.length-1].runnerB);
 			i=teams.length;
 			team=teams.pop();
+			toAdd.push({name:team.getName(),colorIndex:team.colorIndex});
 			if(teams.length===2)
 			{
 				sub.disabled=true;
@@ -613,7 +624,7 @@ along with XC Scorer.  If not, see <http://www.gnu.org/licenses/> -->
 			var id="box"+order.length;
 			var textColor=(cType===LIGHT_COLOR?"black":"white");
 			var html = "<div class=\"box\" id=\""+id+"\" style=\"background:"+boxColor+";color:"+textColor+"\">"+boxAbrv+"</div>";
-			$(html).hide().appendTo("#divBxs").fadeIn(600);
+			$(html).hide().appendTo("#divBxs").fadeIn(300);
 		}
 	</script>
 </html>
